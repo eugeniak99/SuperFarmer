@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+<title>Gra sieciowa</title>
+<meta http-equiv="refresh" content="3">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<body style=" margin: 2%;">
+
+<center><h1>Dołącz do rozpoczętej gry lub stwórz własną</h1></center>
+{% if gamesAll | length  == 0 %}
+<a class="btn btn-primary" href="/imie1">Stwórz własną grę</a>
+{% endif %}
+{% for game in gamesAll %}
+{% if gamesAll[game]['network'] == True and gamesAll[game]['both'] == False %}
+<h3>Dołącz do gry z graczem {{ gamesAll[game]['1'].name}} </h3>
+<a class="btn btn-primary" href="{{ url_for('NameSecondNet', gameId = game ) }}">Dołącz</a>
+{% elif loop.first %}
+<a class="btn btn-primary" href="/imie1">Stwórz własną grę</a>
+{% endif %} 
+{% endfor %}
+
+</body>
+</html>
+

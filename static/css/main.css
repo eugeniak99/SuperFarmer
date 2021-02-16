@@ -1,0 +1,72 @@
+html
+{
+	background-image: url('../images/tlo.jpg');
+	
+body	
+{
+    width:90%;
+    margin:auto;
+
+}	
+	
+	
+}
+.instruction
+{
+	background: white;
+	font-size: 25px;
+	text-align:center;
+	margin-left: auto;
+	margin-right:auto;
+	opacity: 0.9;
+	
+	
+}
+
+ul
+{
+	list-style-type:none;
+}
+
+li
+{
+	text-decoration:none;
+}
+img
+{
+    width: 90px;
+    height: 90px;
+}
+.table 
+{
+    padding: 5%;
+    
+    margin-right: 3rem;
+    margin-left: 3rem;
+    
+}
+ 
+form
+{
+    margin:0 auto;
+    display:block;
+    width: 60%;
+    
+}
+
+input.form-control
+{
+    margin-bottom: 2%;
+}
+
+.btn-primary
+{
+    display: block;
+    width: 10%
+}
+
+#exchange
+{
+    
+    display: inline-block;
+}

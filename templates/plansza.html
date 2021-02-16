@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Graj!</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+ 
+<body style=" margin: 2%; height: 100%;">
+
+</div>
+<center>
+
+<p>
+
+<h1> Kolej gracza {{game['current'].name}} </h1>
+
+<p>Teraz możesz dokonać zamian w stadzie zgodnie z tabelą za pomocą strzałek.
+
+
+<p>
+{% if game['computer'] == False and game['network'] == False %}
+<a href="/Dicehotseat" class="btn btn-primary">Rzuć kostkami</a><p>
+{% if first_animal is defined and second_animal is defined %}
+<p><img src="/static/images/{{first_animal}}.jpg" alt="pierwsze zwierzę">
+<img src="/static/images/{{second_animal}}.jpg" alt="drugie zwierzę">
+{% endif %}
+{% endif %}
+
+{% if game['computer'] == True %}
+<a href="/Dicehotseat" class="btn btn-primary">Rzuć kostkami</a><p>
+{% if first_animal is defined and second_animal is defined %}
+<p><img src="/static/images/{{first_animal}}.jpg" alt="pierwsze zwierzę">
+<img src="/static/images/{{second_animal}}.jpg" alt="drugie zwierzę">
+{% endif %}
+{% endif %}
+
+
+
+
+
+{% if game['network'] == True and game['current'] == game['1'] %}
+ <a class="btn btn-primary" href="/DiceNet">Rzuć koścmi</a><br>
+{% endif %}
+
+{% if game['network'] == True and session['player'] != game['current'].name and game['current'] == game['1'] %}
+{% if first_animal is defined and second_animal is defined %}
+<p><img src="/static/images/{{first_animal}}.jpg" alt="pierwsze zwierzę">
+<img src="/static/images/{{second_animal}}.jpg" alt="drugie zwierzę">
+{% endif %}
+{% endif %}
+
+{% if game['network'] == True and session['player'] == game['current'].name and game['current'] == game['2'] %}
+ <a class="btn btn-primary" href="/DiceNet">Rzuć koścmi</a><br>
+{% endif %}
+{% if game['network'] == True and session['player'] != game['current'].name and game['current'] == game['2'] %}
+{% if first_animal is defined and second_animal is defined %}
+<p><img src="/static/images/{{first_animal}}.jpg" alt="pierwsze zwierzę">
+<img src="/static/images/{{second_animal}}.jpg" alt="drugie zwierzę">
+{% endif %}
+{% endif %}
+ </center>
+
+
+
+<div class="container overflow-hidden">
+     <div class="row gx-5">
+         <div class="col">
+             <center><h1>Gracz {{ game['1'].name }}</h1></center>
+            <table class="table table-success table-striped">
+            <tr>
+                <th>Zwierzę</th>
+                <th>Ilosc</th>
+                <th>Zamiana</th>
+               
+              </tr>
+              <tr>
+                <td><img src="/static/images/rabbit.jpg" alt="Królik"></td>
+                <td>{{game['1'].herd['rabbit']}}</td>
+                <td>
+                {% if game['current'] == game['1'] %}
+                    <a href="/wymiana/1" >
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                    </svg>
+                    </a>
+                {% endif %}
+                </td>
+              </tr>
+              <tr>
+                <td style="height: 15%;"><img src="/static/images/sheep.jpg" alt="Owca"></td>
+                <td>{{game['1'].herd['sheep']}}</td>
+                <td>
+                {% if game['current'] == game['1']%}
+                    <a href="/wymiana/3" >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                    </svg>
+                    </a>
+                     <a href="/wymiana/2" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                    </svg>
+                    </a>
+                  {% endif %} 
+                </td>
+              </tr>
+              <tr>
+                <td><img src="/static/images/pig.jpg" alt="Świnia"></td>
+                <td>
+                  {{game['1'].herd['pig']}} 
+                </td>
+                <td>
+                {% if game['current'] == game['1']%}
+                     <a href="/wymiana/5" >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                    </svg>
+                    </a>
+                    <a href="/wymiana/4" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                    </svg>
+                    </a>
+                {% endif %}
+                </td>
+              </tr>
+               <tr>
+                <td><img src="/static/images/cow.jpg" alt="Krowa"></td>
+                <td>{{game['1'].herd['cow']}}</td>
+                <td>
+                {% if game['current'] == game['1'] %}
+                     <a href="/wymiana/7" >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                    </svg>
+                    </a>
+                    <a href="/wymiana/6" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                    </svg>
+                    </a>
+                {% endif %}
+                </td>
+              </tr>
+               <tr>
+                <td><img src="/static/images/horse.jpg" alt="Koń"></td>
+                <td>{{game['1'].herd['horse']}}</td>
+                <td>
+                {% if game['current'] == game['1']%}
+                    <a href="/wymiana/8" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                    </svg>
+                    </a>
+                 {% endif %} 
+                </td>
+              </tr>
+              
+              </tr>
+               <tr>
+                <td><img src="/static/images/small_dog.jpg" alt="Mały pies"></td>
+                <td>{{game['1'].herd['smallDog']}}</td>
+                <td>
+                {% if game['current'] == game['1']%}
+                    <a href="/wymiana/9" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                    </svg>
+                    </a>
+                    <a href="/wymiana/11">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6 7.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/>
+            </svg>
+                    </a>
+                {% endif %}
+                </td>
+              </tr>
+              </tr>
+               <tr>
+                <td><img src="/static/images/big_dog.jpg" alt="Duży pies"></td>
+                <td>{{game['1'].herd['bigDog']}}</td>
+                <td>
+                {% if game['current'] == game['1']%}
+                    <a href="/wymiana/10">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                    </svg>
+                    </a>
+                     <a href="/wymiana/12">
+                     
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6 7.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/>
+            </svg>
+                     </a>
+               {% endif %}     
+                   
+                </td>
+              </tr>
+            
+            </table>
+        </div>
+        
+        
+        <div class="col">
+            <center><h1>Gracz {{game['2'].name}}</h1></center>
+            <table class="table table-success table-striped">
+            <tr>
+                <th>Zwierzę</th>
+                <th>Ilosc</th>
+                <th>Zamiana</th>
+               
+              </tr>
+              <tr>
+                <td><img src="/static/images/rabbit.jpg" alt="Królik"></td>
+                <td>{{game['2'].herd['rabbit']}}</td>
+                <td>
+                {% if game['current'] == game['2'] and game['computer'] == False %}
+                    <a href="/wymiana/1" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                    </svg>
+                    </a>
+                {% endif %}
+                </td>
+              </tr>
+              
+              <tr>
+                <td style="height: 15%;"><img src="/static/images/sheep.jpg" alt="Owca"></td>
+                <td>{{game['2'].herd['sheep']}}</td>
+                <td>
+                {% if game['current'] == game['2'] and game['computer'] == False %}
+                    <a href="/wymiana/3" >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                    </svg>
+                    </a>
+                     <a href="/wymiana/2" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                    </svg>
+                    </a>
+                 {% endif %}   
+                </td>
+              </tr>
+              <tr>
+                <td><img src="/static/images/pig.jpg" alt="Świnia"></td>
+                <td>
+                  {{game['2'].herd['pig']}} 
+                </td>
+                <td>
+                {% if game['current'] == game['2'] and game['computer'] == False %}
+                     <a href="/wymiana/5" >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                    </svg>
+                    </a>
+                    <a href="/wymiana/4" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                    </svg>
+                    </a>
+                    {% endif %}
+                </td>
+              </tr>
+               <tr>
+                <td><img src="/static/images/cow.jpg" alt="Krowa"></td>
+                <td>{{game['2'].herd['cow']}}</td>
+                <td>
+                {% if game['current'] == game['2'] and game['computer'] == False %}
+                     <a href="/wymiana/7" >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                    </svg>
+                    </a>
+                    <a href="/wymiana/6" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                    </svg>
+                    </a>
+                    {% endif %}
+                </td>
+              </tr>
+               <tr>
+                <td><img src="/static/images/horse.jpg" alt="Koń"></td>
+                <td>{{game['2'].herd['horse']}}</td>
+                <td>
+                {% if game['current'] == game['2'] and game['computer'] == False %}
+                    <a href="/wymiana/8" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                    </svg>
+                    </a>
+                  {% endif %}
+                </td>
+              </tr>
+              
+              </tr>
+               <tr>
+                <td><img src="/static/images/small_dog.jpg" alt="Mały pies"></td>
+                <td>{{game['2'].herd['smallDog']}}</td>
+                <td>
+                {% if game['current'] == game['2'] and game['computer'] == False %}
+                    <a href="/wymiana/9" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                    </svg>
+                    </a>
+                    <a href="/wymiana/11">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6 7.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/>
+            </svg>
+                    </a>
+                {% endif %}
+                </td>
+              </tr>
+              </tr>
+               <tr>
+                <td><img src="/static/images/big_dog.jpg" alt="Duży pies"></td>
+                <td>{{game['2'].herd['bigDog']}}</td>
+                <td>
+                {% if game['current'] == game['2'] and game['computer'] == False %}
+                    <a href="/wymiana/10">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                    </svg>
+                    </a>
+                     <a href="/wymiana/12">
+                     
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6 7.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/>
+            </svg>
+                     </a>
+                  {% endif %}  
+                   
+                </td>
+              </tr>
+            
+            </table>
+        </div>
+
+
+
+      <center>
+       <div class="col" style="width: 100%;">
+            <img style="margin: 3%; width: 50%; height: 70%; vertical-align: center;" src="/static/images/tabela1.jpg" alt="tabela zamiany">
+       </div>
+<center> 
+    </div>
+</div>
+
+
+</body>
+ 
+</html>

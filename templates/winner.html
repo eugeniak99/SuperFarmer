@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+ 
+<body>
+<h1 id="flash1"><center>Gracz {{winner.name}} wygrał grę.</center></h1>
+<p>
+<a href="{{url_for('main')}}" class="btn btn-primary">Przedjź na stronę startową</a><p>
+</body>
+
+<script>
+    function flash(id, kolor, czas, kolor2, czas2)
+    {
+        document.getElementById(id).style.color = kolor;
+        setTimeout('flash("' + id + '","' + kolor2 + '",' + czas2 + ',"' + kolor + '",' + czas + ')', czas);
+    }
+    flash("flash1", "red", 300, "black", 300);
+
+</script>
+
+</html>

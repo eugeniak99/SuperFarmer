@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<head>
+<title>Graj!</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<meta http-equiv="refresh" content="3">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body style=" margin: 2%;">
+
+</div>
+
+<center>
+<p>
+
+<h1> Kolej gracza {{game['current'].name}} </h1>
+<h3>Poczekaj na swoją kolej</h3>
+<p>
+{% if game['network'] and session['player'] != game['current'].name and game['current'] == game['2']%}
+{% if first_animal is defined and second_animal is defined %}
+<p><img src="/static/images/{{first_animal}}.jpg" alt="pierwsze zwierzę">
+<img src="/static/images/{{second_animal}}.jpg" alt="drugie zwierzę">
+{% endif %}
+{% endif %}
+ </center>
+ <p>
+ <center>
+{% if game['network'] and session['player'] != game['current'].name and game['current'] == game['1']%}
+{% if first_animal is defined and second_animal is defined %}
+{% if first_animal != None and second_animal != None %}
+<p><img src="/static/images/{{first_animal}}.jpg" alt="pierwsze zwierzę">
+<img src="/static/images/{{second_animal}}.jpg" alt="drugie zwierzę">
+{% endif %}
+{% endif %}
+{% endif %}
+</center>
+
+
+
+<div class="container overflow-hidden">
+     <div class="row gx-5">
+         <div class="col">
+             <center><h1>Gracz {{ game['1'].name }}</h1></center>
+            <table class="table table-success table-striped">
+            <tr>
+                <th>Zwierzę</th>
+                <th>Ilosc</th>
+                <th>Zamiana</th>
+               
+              </tr>
+              <tr>
+                <td><img src="/static/images/rabbit.jpg" alt="Królik"></td>
+                <td>{{game['1'].herd['rabbit']}}</td>
+                <td>
+                
+                </td>
+              </tr>
+              <tr>
+                <td style="height: 15%;"><img src="/static/images/sheep.jpg" alt="Owca"></td>
+                <td>{{game['1'].herd['sheep']}}</td>
+                <td>
+                
+                </td>
+              </tr>
+              <tr>
+                <td><img src="/static/images/pig.jpg" alt="Świnia"></td>
+                <td>
+                  {{game['1'].herd['pig']}} 
+                </td>
+                <td>
+                
+                </td>
+              </tr>
+               <tr>
+                <td><img src="/static/images/cow.jpg" alt="Krowa"></td>
+                <td>{{game['1'].herd['cow']}}</td>
+                <td>
+                
+                </td>
+              </tr>
+               <tr>
+                <td><img src="/static/images/horse.jpg" alt="Koń"></td>
+                <td>{{game['1'].herd['horse']}}</td>
+                 <td>
+                 
+                </td>
+                
+              </tr>
+              
+              </tr>
+               <tr>
+                <td><img src="/static/images/small_dog.jpg" alt="Mały pies"></td>
+                <td>{{game['1'].herd['smallDog']}}</td>
+                <td>
+                
+                </td>
+              </tr>
+              </tr>
+               <tr>
+                <td><img src="/static/images/big_dog.jpg" alt="Duży pies"></td>
+                <td>{{game['1'].herd['bigDog']}}</td>
+                <td>
+                  
+                   
+                </td>
+              </tr>
+            
+            </table>
+        </div>
+        
+        
+        <div class="col">
+            <center><h1>Gracz {{game['2'].name}}</h1></center>
+            <table class="table table-success table-striped">
+            <tr>
+                <th>Zwierzę</th>
+                <th>Ilosc</th>
+                <th>Zamiana</th>
+               
+              </tr>
+              <tr>
+                <td><img src="/static/images/rabbit.jpg" alt="Królik"></td>
+                <td>{{game['2'].herd['rabbit']}}</td>
+                <td>
+                
+                </td>
+              </tr>
+              
+              <tr>
+                <td style="height: 15%;"><img src="/static/images/sheep.jpg" alt="Owca"></td>
+                <td>{{game['2'].herd['sheep']}}</td>
+                <td>
+                 
+                </td>
+              </tr>
+              <tr>
+                <td><img src="/static/images/pig.jpg" alt="Świnia"></td>
+                <td>
+                  {{game['2'].herd['pig']}} 
+                </td>
+                <td>
+                
+                </td>
+              </tr>
+               <tr>
+                <td><img src="/static/images/cow.jpg" alt="Krowa"></td>
+                <td>{{game['2'].herd['cow']}}</td>
+                <td>
+                
+                </td>
+              </tr>
+               <tr>
+                <td><img src="/static/images/horse.jpg" alt="Koń"></td>
+                <td>{{game['2'].herd['horse']}}</td>
+                <td>
+                
+                </td>
+              </tr>
+              
+              </tr>
+               <tr>
+                <td><img src="/static/images/small_dog.jpg" alt="Mały pies"></td>
+                <td>{{game['2'].herd['smallDog']}}</td>
+                <td>
+                
+                </td>
+              </tr>
+              </tr>
+               <tr>
+                <td><img src="/static/images/big_dog.jpg" alt="Duży pies"></td>
+                <td>{{game['2'].herd['bigDog']}}</td>
+                <td>
+                </td>
+                   
+                </td>
+              </tr>
+            
+            </table>
+        </div>
+
+
+     
+    </div>
+</div>
+
+
+</body>
+ 
+</html>
